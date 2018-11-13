@@ -1,6 +1,6 @@
 <?php
 
-namespace Ashraam\NovaGmap;
+namespace Acm\NovaGmap;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;

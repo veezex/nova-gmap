@@ -1,6 +1,6 @@
 {
-    "name": "ashraam/nova-gmap",
-    "description": "A Laravel Nova field.",
+    "name": "adamcmoore/nova-gmap",
+    "description": "A Laravel Nova field using Google Maps to provide latitude/longitude data.",
     "keywords": [
         "laravel",
         "nova"
@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Ashraam\\NovaGmap\\": "src/"
+            "Acm\\NovaGmap\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ashraam\\NovaGmap\\FieldServiceProvider"
+                "Acm\\NovaGmap\\FieldServiceProvider"
             ]
         }
     },
