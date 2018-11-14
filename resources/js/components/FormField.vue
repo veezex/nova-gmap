@@ -6,8 +6,8 @@
 			<div class="google-map" ref="map"></div>
 
 			<div class="inputs">
-				<input id="latitude" name="latitude" type="hidden" v-model="latitude" />
-				<input id="longitude" name="longitude" type="hidden" v-model="longitude" />
+				<input id="latitude" v-name="latitude_fieldname" type="hidden" v-model="latitude" />
+				<input id="longitude" v-name="longitude_fieldname" type="hidden" v-model="longitude" />
 			</div>
 		</template>
 	</default-field>
@@ -33,10 +33,20 @@ export default {
 		}
 	},
 
+	computed: {
+		latitude_fieldname: function() {
+			console.log(this);
+			return this.field.attribute+'[latitude]';
+		},
+		longitude_fieldname: function() {
+			return this.field.attribute+'[latitude]';
+		}
+	},
+
 	methods: {
 		fill(formData) {
-			formData.append('latitude', this.latitude);
-			formData.append('longitude', this.longitude);
+			formData.append(this.latitude_fieldname, this.value.latitude);
+			formData.append(this.longitude_fieldname, this.value.longitude);
 		},
 
 		addMarker(lat, lng) {
