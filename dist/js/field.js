@@ -249,6 +249,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resourceName', 'field']
@@ -287,17 +292,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(22)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(7)
 /* template */
-var __vue_template__ = __webpack_require__(8)
+var __vue_template__ = __webpack_require__(24)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-0224618e"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -347,50 +356,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resource', 'resourceName', 'resourceId', 'field'],
 
-    computed: {
-        label: function label() {
-            return this.field.hasCoordinates ? 'Oui' : 'Non';
+    computed: {},
+
+    mounted: function mounted() {
+        var el = this.$refs['map'];
+        var options = {
+            zoom: this.field.zoom,
+            center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
+        };
+
+        this.map = new google.maps.Map(el, options);
+
+        if (this.field.latitude && this.field.longitude) {
+            this.addMarker(this.field.latitude, this.field.longitude);
+        }
+    },
+
+
+    methods: {
+        addMarker: function addMarker(lat, lng) {
+            if (this.marker) {
+                this.marker.setMap(null);
+            }
+
+            var coords = new google.maps.LatLng(lat, lng);
+
+            this.marker = new google.maps.Marker({
+                position: coords,
+                map: this.map,
+                draggable: true
+            });
+
+            this.map.setCenter(coords);
         }
     }
 });
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "panel-item",
-    { attrs: { field: _vm.field } },
-    [
-      _c("template", { slot: "value" }, [
-        _c("span", {
-          staticClass: "inline-block rounded-full w-2 h-2 mr-1",
-          class: {
-            "bg-success": _vm.field.hasCoordinates,
-            "bg-danger": !_vm.field.hasCoordinates
-          }
-        }),
-        _vm._v(" " + _vm._s(_vm.label) + "\n    ")
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0224618e", module.exports)
-  }
-}
-
-/***/ }),
+/* 8 */,
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -870,11 +873,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		latitude_fieldname: function latitude_fieldname() {
-			console.log(this);
 			return this.field.attribute + '[latitude]';
 		},
 		longitude_fieldname: function longitude_fieldname() {
-			return this.field.attribute + '[latitude]';
+			return this.field.attribute + '[longitude]';
 		}
 	},
 
@@ -928,22 +930,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		this.map = new google.maps.Map(el, options);
 
-		if (this.field.value) {
+		if (this.value.latitude && this.value.longitude) {
 			this.addMarker(this.value.latitude, this.value.longitude);
 		}
 
 		google.maps.event.addListener(this.map, 'click', function (event) {
 			_this.latitude = event.latLng.lat();
-			_this.longitude = event.latLng.longitude();
+			_this.longitude = event.latLng.lng();
 
 			_this.addMarker(_this.latitude, _this.longitude);
 		});
 
 		this.autocomplete = new google.maps.places.Autocomplete(this.$refs.address, {
 			types: ['geocode']
-			/*componentRestrictions: {
-   	country: 'fr'
-   }*/
 		});
 
 		this.autocomplete.addListener('place_changed', function () {
@@ -11214,6 +11213,78 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(23);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(13)("9ebe7a9a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0224618e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DetailField.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0224618e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DetailField.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.google-map[data-v-0224618e] {\n    width: 100%;\n    max-width: 400px;\n    height: 400px;\n    margin-bottom: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "panel-item",
+    { attrs: { field: _vm.field } },
+    [
+      _c("template", { slot: "value" }, [
+        _c("div", { ref: "map", staticClass: "google-map" })
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0224618e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

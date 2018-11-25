@@ -35,11 +35,10 @@ export default {
 
 	computed: {
 		latitude_fieldname: function() {
-			console.log(this);
 			return this.field.attribute+'[latitude]';
 		},
 		longitude_fieldname: function() {
-			return this.field.attribute+'[latitude]';
+			return this.field.attribute+'[longitude]';
 		}
 	},
 
@@ -94,13 +93,13 @@ export default {
 
 		this.map = new google.maps.Map(el, options);
 
-		if (this.field.value) {
+        if (this.value.latitude && this.value.longitude) {
 			this.addMarker(this.value.latitude, this.value.longitude);
 		}
 
 		google.maps.event.addListener(this.map, 'click', (event) => {
 			this.latitude = event.latLng.lat();
-			this.longitude = event.latLng.longitude();
+			this.longitude = event.latLng.lng();
 
 			this.addMarker(this.latitude, this.longitude);
 		});
@@ -109,9 +108,6 @@ export default {
 			(this.$refs.address),
 			{
 				types: ['geocode'],
-				/*componentRestrictions: {
-					country: 'fr'
-				}*/
 			}
 		);
 

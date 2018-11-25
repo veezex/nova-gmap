@@ -15,9 +15,9 @@ class NovaGmap extends Field
 	{
 		parent::__construct($name, $attribute, $resolveCallback);
 
-		$this->latitude(env('DEFAULT_LATITUDE'))
-			 ->longitude(env('DEFAULT_LONGITUDE'))
-			 ->zoom(env('DEFAULT_ZOOM'));
+		$this->latitude(config('nova-gmaps.default_latitude'))
+			 ->longitude(config('nova-gmaps.default_longitude'))
+			 ->zoom(config('nova-gmaps.default_zoom'));
 	}
 
 

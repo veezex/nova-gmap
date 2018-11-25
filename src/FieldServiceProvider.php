@@ -21,7 +21,7 @@ class FieldServiceProvider extends ServiceProvider
             Nova::script('google-map', $gmap);
             Nova::style('nova-gmap', __DIR__.'/../dist/css/field.css');
             Nova::provideToScript([
-                'api_key' => env('GOOGLE_MAP_API_KEY'),
+                'api_key' => config('nova-gmaps.gmaps_api_key'),
                 'locale' => config('app.locale')
             ]);
         });
@@ -34,6 +34,11 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $config_path = dirname(__DIR__).'/publishable/config/nova-gmaps.php';
+
+        $this->publishes(
+            [$config_path => config_path('nova-gmaps.php')], 
+            'config'
+        );
     }
 }

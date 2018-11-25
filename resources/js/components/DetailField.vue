@@ -1,7 +1,7 @@
 <template>
     <panel-item :field="field">
         <template slot="value">
-            <span class="inline-block rounded-full w-2 h-2 mr-1" :class="{'bg-success': field.hasCoordinates, 'bg-danger': !field.hasCoordinates}"></span> {{ label }}
+            <div class="google-map" ref="map"></div>
         </template>
     </panel-item>
 </template>
@@ -11,9 +11,47 @@ export default {
     props: ['resource', 'resourceName', 'resourceId', 'field'],
     
     computed: {
-        label() {
-            return this.field.hasCoordinates ? 'Oui' : 'Non'
+    },
+
+    mounted() {
+        const el = this.$refs['map'];
+        const options = {
+            zoom: this.field.zoom,
+            center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
         }
+
+        this.map = new google.maps.Map(el, options);
+
+        if (this.field.latitude && this.field.longitude) {
+            this.addMarker(this.field.latitude, this.field.longitude);
+        }
+    },
+
+    methods: {
+        addMarker(lat, lng) {
+            if (this.marker) {
+                this.marker.setMap(null);
+            }
+
+            const coords = new google.maps.LatLng(lat, lng);
+
+            this.marker = new google.maps.Marker({
+                position: coords,
+                map: this.map,
+                draggable: true
+            });
+
+            this.map.setCenter(coords);
+        },
     }
 }
 </script>
+
+<style scoped>
+.google-map {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+</style>
