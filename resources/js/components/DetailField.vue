@@ -17,13 +17,13 @@ export default {
         const el = this.$refs['map'];
         const options = {
             zoom: this.field.zoom,
-            center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
+            center: new google.maps.LatLng(this.field.value.latitude, this.field.value.longitude)
         }
 
         this.map = new google.maps.Map(el, options);
 
-        if (this.field.latitude && this.field.longitude) {
-            this.addMarker(this.field.latitude, this.field.longitude);
+        if (this.field.value.latitude && this.field.value.longitude) {
+            this.addMarker(this.field.value.latitude, this.field.value.longitude);
         }
     },
 

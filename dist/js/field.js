@@ -249,11 +249,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resourceName', 'field']
@@ -362,13 +357,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var el = this.$refs['map'];
         var options = {
             zoom: this.field.zoom,
-            center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
+            center: new google.maps.LatLng(this.field.value.latitude, this.field.value.longitude)
         };
 
         this.map = new google.maps.Map(el, options);
 
-        if (this.field.latitude && this.field.longitude) {
-            this.addMarker(this.field.latitude, this.field.longitude);
+        if (this.field.value.latitude && this.field.value.longitude) {
+            this.addMarker(this.field.value.latitude, this.field.value.longitude);
         }
     },
 
