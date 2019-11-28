@@ -42,8 +42,8 @@ class NovaGmap extends Field
 	protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
 	{
 		$model->setAttribute($attribute, (object) [
-			'latitude'  => array_get($request, $attribute.'.latitude'),
-			'longitude' => array_get($request, $attribute.'.longitude'),
+			'latitude'  => data_get($request, $attribute.'.latitude'),
+			'longitude' => data_get($request, $attribute.'.longitude'),
 		]);
 	}
 }
