@@ -17,7 +17,6 @@ export default {
 	data() {
 		return {
 			map: null,
-			autocomplete: null,
 			marker: null,
 			latitude: null,
 			longitude: null
@@ -70,18 +69,18 @@ export default {
 	mounted() {
 		this.setInitialValue();
 
+		const centerLat = this.value.latitude ? this.value.latitude : this.field.latitude;
+		const centerLng = this.value.longitude ? this.value.longitude : this.field.longitude;
+
 		const el = this.$refs['map'];
 		const options = {
 			zoom: this.field.zoom,
-			center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
+			center: new google.maps.LatLng(centerLat, centerLng)
 		}
 
 		this.map = new google.maps.Map(el, options);
 
-        if (this.field.latitude && this.field.longitude) {
-			this.value.latitude = this.field.latitude;
-			this.value.longitude = this.field.longitude;
-
+        if (this.value.latitude && this.value.longitude) {
 			this.drawMarker();
 		}
 
