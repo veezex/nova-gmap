@@ -42,8 +42,6 @@ export default {
 
 	methods: {
 		fill(formData) {
-
-
 			formData.append(this.latitude_fieldname, this.value.latitude);
 			formData.append(this.longitude_fieldname, this.value.longitude);
 		},
@@ -61,8 +59,8 @@ export default {
 				draggable: true
 			});
 
-			this.value.latitude = event.latLng.lat();
-			this.value.longitude = event.latLng.lng();
+			this.value.latitude = lat;
+			this.value.longitude = lng;
 			this.marker.addListener('click', this.removeMarker);
 		},
 
