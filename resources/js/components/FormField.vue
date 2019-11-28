@@ -1,13 +1,7 @@
 <template>
 	<default-field :field="field" :errors="errors" :full-width-content="true">
 		<template slot="field">
-
 			<div class="google-map" ref="map"></div>
-
-			<div class="inputs">
-				<input id="latitude" v-name="latitude_fieldname" type="hidden" v-model="latitude" />
-				<input id="longitude" v-name="longitude_fieldname" type="hidden" v-model="longitude" />
-			</div>
 		</template>
 	</default-field>
 </template>
@@ -18,7 +12,7 @@ import { FormField, HandlesValidationErrors } from 'laravel-nova'
 export default {
 	mixins: [FormField, HandlesValidationErrors],
 
-	props: ['resourceName', 'resourceId', 'field', 'placeholder'],
+	props: ['resourceName', 'resourceId', 'field'],
 
 	data() {
 		return {
@@ -26,8 +20,7 @@ export default {
 			autocomplete: null,
 			marker: null,
 			latitude: null,
-			longitude: null,
-			placeholderText: this.placeholder
+			longitude: null
 		}
 	},
 
@@ -51,12 +44,12 @@ export default {
 			}
 		},
 
-		addMarker(lat, lng) {
+		drawMarker() {
 			if (this.marker) {
 				this.marker.setMap(null);
 			}
 
-			const coords = new google.maps.LatLng(lat, lng);
+			const coords = new google.maps.LatLng(this.value.latitude, this.value.longitude);
 
 			this.marker = new google.maps.Marker({
 				position: coords,
@@ -64,15 +57,12 @@ export default {
 				draggable: true
 			});
 
-			console.log(lat, lng);
-			this.value.latitude = lat;
-			this.value.longitude = lng;
 			this.marker.addListener('click', this.removeMarker);
 		},
 
 		removeMarker(event) {
-			this.value.latitude = '';
-			this.value.longitude = '';
+			this.value.latitude = null;
+			this.value.longitude = null;
 			this.marker.setMap(null);
 		}
 	},
@@ -88,17 +78,19 @@ export default {
 
 		this.map = new google.maps.Map(el, options);
 
-        if (this.value.latitude && this.value.longitude) {
-			this.addMarker(this.value.latitude, this.value.longitude);
+        if (this.field.latitude && this.field.longitude) {
+			this.value.latitude = this.field.latitude;
+			this.value.longitude = this.field.longitude;
+
+			this.drawMarker();
 		}
 
 		google.maps.event.addListener(this.map, 'click', (event) => {
-			this.latitude = event.latLng.lat();
-			this.longitude = event.latLng.lng();
+			this.value.latitude = event.latLng.lat();
+			this.value.longitude = event.latLng.lng();
 
-			this.addMarker(this.latitude, this.longitude);
+			this.drawMarker();
 		});
-
 	}
 }
 </script>
@@ -107,6 +99,6 @@ export default {
 .google-map {
 	width: 100%;
 	height: 400px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 </style>
