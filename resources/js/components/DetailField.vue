@@ -14,19 +14,16 @@ export default {
     },
 
     mounted() {
-        console.log('mtd', this.field);
-
         const el = this.$refs['map'];
         const options = {
             zoom: this.field.zoom,
-            center: new google.maps.LatLng(this.field.value.latitude, this.field.value.longitude)
+            center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
         }
 
         this.map = new google.maps.Map(el, options);
 
-        if (this.field.value.latitude && this.field.value.longitude) {
-            console.log(111, this.field.value);
-            this.addMarker(this.field.value.latitude, this.field.value.longitude);
+        if (this.field.latitude && this.field.longitude) {
+            this.addMarker(this.field.latitude, this.field.longitude);
         }
     },
 
@@ -37,7 +34,6 @@ export default {
             }
 
             const coords = new google.maps.LatLng(lat, lng);
-            console.log(222, lat, lng);
 
             this.marker = new google.maps.Marker({
                 position: coords,
