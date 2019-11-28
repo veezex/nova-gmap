@@ -84,6 +84,7 @@ export default {
 			this.drawMarker();
 		}
 
+		console.log(this.value);
 		google.maps.event.addListener(this.map, 'click', (event) => {
 			this.value.latitude = event.latLng.lat();
 			this.value.longitude = event.latLng.lng();
