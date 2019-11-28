@@ -42,8 +42,10 @@ export default {
 
 	methods: {
 		fill(formData) {
-			formData.append(this.latitude_fieldname, this.value.latitude);
-			formData.append(this.longitude_fieldname, this.value.longitude);
+			if (this.value.latitude && this.value.longitude) {
+				formData.append(this.latitude_fieldname, this.value.latitude);
+				formData.append(this.longitude_fieldname, this.value.longitude);
+			}
 		},
 
 		addMarker(lat, lng) {
@@ -59,6 +61,7 @@ export default {
 				draggable: true
 			});
 
+			console.log(lat, lng);
 			this.value.latitude = lat;
 			this.value.longitude = lng;
 			this.marker.addListener('click', this.removeMarker);
