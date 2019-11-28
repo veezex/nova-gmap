@@ -23,6 +23,7 @@ export default {
         this.map = new google.maps.Map(el, options);
 
         if (this.field.value.latitude && this.field.value.longitude) {
+            console.log(111, this.field.value);
             this.addMarker(this.field.value.latitude, this.field.value.longitude);
         }
     },
@@ -34,6 +35,7 @@ export default {
             }
 
             const coords = new google.maps.LatLng(lat, lng);
+            console.log(222, lat, lng);
 
             this.marker = new google.maps.Marker({
                 position: coords,
