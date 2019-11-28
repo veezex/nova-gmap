@@ -43,6 +43,7 @@ export default {
 	methods: {
 		fill(formData) {
 			if (this.value.latitude && this.value.longitude) {
+				console.log('fill', this.value.latitude, this.value.longitude);
 				formData.append(this.latitude_fieldname, this.value.latitude);
 				formData.append(this.longitude_fieldname, this.value.longitude);
 			}
