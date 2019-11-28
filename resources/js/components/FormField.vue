@@ -63,8 +63,6 @@ export default {
 
 			this.marker.addListener('click', this.removeMarker);
 			this.marker.addListener('dragend', this.updateCoords);
-
-			this.map.setCenter(coords);
 		},
 
 		updateCoords(event) {
