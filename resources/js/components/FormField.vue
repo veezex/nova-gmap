@@ -86,8 +86,6 @@ export default {
 			center: new google.maps.LatLng(this.field.latitude, this.field.longitude)
 		}
 
-		this.field.fill = this.fill;
-
 		this.map = new google.maps.Map(el, options);
 
         if (this.value.latitude && this.value.longitude) {
