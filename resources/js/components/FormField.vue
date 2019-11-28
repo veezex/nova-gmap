@@ -68,7 +68,7 @@ export default {
 
 	mounted() {
 		this.setInitialValue();
-		this.map = new google.maps.Map(el, options);
+		console.log(this.value);
 
 		const centerLat = this.value.latitude ? this.value.latitude : this.field.latitude;
 		const centerLng = this.value.longitude ? this.value.longitude : this.field.longitude;
