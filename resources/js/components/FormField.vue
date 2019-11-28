@@ -69,6 +69,10 @@ export default {
 	mounted() {
 		this.setInitialValue();
 
+		if (!this.value) {
+			this.value = {latitude: null, longitude: null};
+		}
+
 		const centerLat = this.value.latitude ? this.value.latitude : this.field.latitude;
 		const centerLng = this.value.longitude ? this.value.longitude : this.field.longitude;
 
