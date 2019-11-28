@@ -1,5 +1,5 @@
 <template>
-	<default-field :field="field" :errors="errors">
+	<default-field :field="field" :errors="errors" :full-width-content="true">
 		<template slot="field">
 
 			<div class="google-map" ref="map"></div>
