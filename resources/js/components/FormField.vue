@@ -68,7 +68,6 @@ export default {
 
 	mounted() {
 		this.setInitialValue();
-		console.log(this.value);
 
 		const centerLat = this.value.latitude ? this.value.latitude : this.field.latitude;
 		const centerLng = this.value.longitude ? this.value.longitude : this.field.longitude;
@@ -79,12 +78,12 @@ export default {
 			center: new google.maps.LatLng(centerLat, centerLng)
 		}
 
+		this.map = new google.maps.Map(el, options);
 
         if (this.value.latitude && this.value.longitude) {
 			this.drawMarker();
 		}
 
-		console.log(this.value);
 		google.maps.event.addListener(this.map, 'click', (event) => {
 			this.value.latitude = event.latLng.lat();
 			this.value.longitude = event.latLng.lng();
