@@ -1,7 +1,6 @@
 <template>
 	<default-field :field="field" :errors="errors">
 		<template slot="field">
-			<input ref="address" id="address" type="text" v-placeholder="placeholderText" v-model="address" />
 
 			<div class="google-map" ref="map"></div>
 
@@ -25,7 +24,6 @@ export default {
 		return {
 			map: null,
 			autocomplete: null,
-			address: null,
 			marker: null,
 			latitude: null,
 			longitude: null,
@@ -102,25 +100,6 @@ export default {
 			this.addMarker(this.latitude, this.longitude);
 		});
 
-		this.autocomplete = new google.maps.places.Autocomplete(
-			(this.$refs.address),
-			{
-				types: ['geocode'],
-			}
-		);
-
-		this.autocomplete.addListener('place_changed', () => {
-			let place = this.autocomplete.getPlace();
-			let lat = place.geometry.location.lat();
-			let lng = place.geometry.location.lng();
-
-			this.address = place.formatted_address;
-
-			this.value.latitude = lat;
-			this.value.longitude = lng;
-
-			this.addMarker(lat, lng);
-		});
 	}
 }
 </script>
@@ -130,16 +109,5 @@ export default {
 	width: 100%;
 	height: 400px;
 	margin-bottom: 10px;
-}
-
-#address {
-	width: 100%;
-	border: 1px solid rgb(186,202,214);
-	border-radius: 8px;
-	padding: 1px 12px;
-	height: 36px;
-	font-size: 16px;
-	color: rgb(123,133,142);
-	margin-bottom: 8px;
 }
 </style>

@@ -18,7 +18,7 @@ class FieldServiceProvider extends ServiceProvider
         Nova::serving(function (ServingNova $event) {
             $api_key = config('nova-gmaps.gmaps_api_key');
             $locale  = config('app.locale');
-            $gmap    = 'https://maps.googleapis.com/maps/api/js?key='.$api_key.'&libraries=places&language='.$locale;
+            $gmap    = 'https://maps.googleapis.com/maps/api/js?key='.$api_key.'&language='.$locale;
             Nova::script('nova-gmap', __DIR__.'/../dist/js/field.js');
             Nova::script('google-map', $gmap);
             Nova::style('nova-gmap', __DIR__.'/../dist/css/field.css');
