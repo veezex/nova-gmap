@@ -14,6 +14,8 @@ export default {
     },
 
     mounted() {
+        console.log('mtd', this.field);
+
         const el = this.$refs['map'];
         const options = {
             zoom: this.field.zoom,
